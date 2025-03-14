@@ -1,0 +1,73 @@
+addrmap NIMBUS {
+
+  name = "Nimbus ASIC Register Map";
+
+  default regwidth = 32;
+  default hw = r;
+  default sw = rw;
+
+  // ---------------------------------------------------------------------------
+  // Common field / reg definitions
+  //---------------------------------------------------------------------------
+
+  field unused {
+    hw = r; sw = r;
+  };
+
+  reg PLACEHOLDER {
+    name = "Placeholder";
+    desc = "Placeholder register";
+    unused unused0[31:0] = 0;
+  };
+
+  //---------------------------------------------------------------------------
+  // Regfiles
+  //---------------------------------------------------------------------------
+
+  regfile CLOCK {
+    name = "Clock and PLL configuration";
+    desc = "Registers to configure the PLL's multipliers / dividers, and any
+      other clock dividers / muxes / gates, to derive all internal clocks from the
+      REFCLK input.";
+
+    reg PLL_EN {
+      unused unused0[31:1] = 0;
+
+      field {
+        desc = "PLL enable";
+      } EN[0:0] = 0;
+    } PLL_EN @0x00;
+  };
+
+  regfile OPS {
+    name = "Operations";
+    desc = "Configure and control the vector/matrix operation. VMM/VMI, single
+      or batch. FSM timings. INT pin function. Input / output buffer access via JTAG.";
+
+    PLACEHOLDER PLACEHOLDER @0x00;
+  };
+
+  regfile CALIB {
+    name = "Calibration and overrides";
+    desc = "Calibration values and overrides for analogue components.";
+
+    PLACEHOLDER PLACEHOLDER @0x00;
+  };
+
+  regfile ATEST {
+    name = "Analogue test structure control";
+    desc = "Control of the analogue test array, and test bus muxes.";
+
+    PLACEHOLDER PLACEHOLDER @0x00;
+  };
+
+
+  //---------------------------------------------------------------------------
+  // Regfile Instantiations
+  //---------------------------------------------------------------------------
+
+  CLOCK         CLOCK   @0x000;
+  OPS           OPS     @0x100;
+  CALIB         CALIB   @0x200;
+  ATEST         ATEST   @0x300;
+};

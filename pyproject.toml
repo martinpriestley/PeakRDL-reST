@@ -1,0 +1,30 @@
+[project]
+name = "PeakRDL-rest"
+requires-python = ">= 3.8"
+dependencies = [
+    "systemrdl-compiler",
+    "peakrdl",
+    "rstcloth",
+]
+dynamic = ["version"]
+
+[build-system]
+requires = [
+    "setuptools",
+    "wheel",
+    "setuptools_scm[toml]",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tools.setuptools.dynamic]
+version = { attr = "peakrdl_rest.__version__" }
+
+[tool.setuptools_scm]
+write_to = "src/peakrdl_rest/_version.py"
+
+[project.entry-points."peakrdl.exporters"]
+rest = "peakrdl_rest.__peakrdl__:Exporter"
+
