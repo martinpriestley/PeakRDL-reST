@@ -46,7 +46,7 @@ addrmap FOOBAR {
 
       field {
         encode = my_enum_t;
-      } E_NUFF[4:3] = my_enum_t::e_foo;
+      } E_NUFF[4:3] = my_enum_t::e_bar;
 
       field {
         encode = my_enum_t;
@@ -78,7 +78,7 @@ addrmap FOOBAR {
     name = "Analogue test structure control";
     desc = "Control of the analogue test array, and test bus muxes.";
 
-    PLACEHOLDER PLACEHOLDER @0x00;
+    PLACEHOLDER PLACEHOLDER[4] @0x00 += 2;
   };
 
 

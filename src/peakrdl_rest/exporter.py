@@ -4,6 +4,7 @@
 # - enum encoding as field reset value in table
 # - Calculate how many leading 0's to put on addresses in a more
 #   context-sensitive manner
+# - Muti-page output??
 # - Text fields that include RDL markup should really get translated to rst
 
 __authors__ = [
@@ -12,6 +13,8 @@ __authors__ = [
 
 import json
 
+from functools import reduce
+from operator import mul
 from pathlib import Path
 from typing import List, Optional, Union
 from rstcloth import RstCloth
@@ -64,6 +67,13 @@ class RestExporter:
         return "regmap__" + path
 
     def _addressable_info(self, node: AddressableNode, level: int):
+        # If we're describing an array of registers, point at the [0] instance.
+        # TODO - presumably this breaks with multidimensional arrays
+        set_index = False
+        if node.is_array and node.current_idx is None:
+            node.current_idx = [0]
+            set_index = True
+
         self.doc.field(name="Absolute Address", value=self.hex(node.absolute_address))
         self.doc.field(name="Base Offset", value=self.hex(node.raw_address_offset))
         if node.is_array and node.array_dimensions is not None:
@@ -82,6 +92,9 @@ class RestExporter:
             self.doc.field(name="Description", value=desc)
 
         self.doc.newline()
+
+        if set_index:
+            node.current_idx = None
 
 
     def _convert_addrmap(self, node: AddressableNode, level: int):
@@ -131,9 +144,19 @@ class RestExporter:
 
             hw_access = field.get_property("hw").name
 
+            # Reset value is generally nothing or an int. If it's an int, it
+            # might correspond to an enum value.
             reset = field.get_property("reset", default="-")
             if isinstance(reset, int):
-                reset = hex(reset)
+
+                enum = field.get_property("encode")
+                if enum:
+                    for m in enum:
+                        if m.value == reset:
+                            reset = f"{hex(reset)} ({m.name})"
+                            break
+                else :
+                    reset = hex(reset)
 
             # Fields only get a section to link to if they have a description or
             # enum. Otherwise, put a link to (but not from) the table for that
