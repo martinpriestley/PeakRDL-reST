@@ -2,3 +2,7 @@ systemrdl-compiler
 peakrdl
 
 rstcloth
+
+sphinx
+sphinx-rtd-theme
+sphinxcontrib-bitfield

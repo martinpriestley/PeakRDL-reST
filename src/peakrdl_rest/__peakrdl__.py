@@ -26,11 +26,11 @@ class Exporter(ExporterSubcommandPlugin):
     def add_exporter_arguments(self, arg_group: "argparse._ActionsContainer"):  # type: ignore
         """Add PeakRDL exporter arguments."""
         arg_group.add_argument(
-            "--depth",
-            dest="depth",
-            default=0,
-            type=int,
-            help="Depth of generation (0 means all)",
+            "-d",
+            "--diagrams",
+            default=False,
+            action="store_true",
+            help="Generate sphinxcontrib-bitfields diagram for each register",
         )
 
     def do_export(
@@ -45,4 +45,5 @@ class Exporter(ExporterSubcommandPlugin):
         RestExporter().export(
             top_node,
             options.output,
+            bitfield_diagrams = options.diagrams
         )

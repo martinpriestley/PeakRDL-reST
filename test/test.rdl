@@ -1,10 +1,21 @@
-addrmap NIMBUS {
+addrmap FOOBAR {
 
-  name = "Nimbus ASIC Register Map";
+  name = "Foobar SoC Register Map";
 
-  default regwidth = 32;
+  default regwidth = 16;
   default hw = r;
   default sw = rw;
+
+  // ---------------------------------------------------------------------------
+  // Type definitions
+  //---------------------------------------------------------------------------
+
+  enum my_enum_t {
+      e_foo = 2'd0 { name = "foo sticks"; };
+      e_bar = 2'd1 { name = "bar tab"; };
+      e_baz = 2'd2 { name = "baz woz ere"; };
+      e_qux = 2'd3 { name = "qux like a duck"; };
+  };
 
   // ---------------------------------------------------------------------------
   // Common field / reg definitions
@@ -17,7 +28,7 @@ addrmap NIMBUS {
   reg PLACEHOLDER {
     name = "Placeholder";
     desc = "Placeholder register";
-    unused unused0[31:0] = 0;
+    unused unused0[15:0] = 0;
   };
 
   //---------------------------------------------------------------------------
@@ -31,7 +42,16 @@ addrmap NIMBUS {
       REFCLK input.";
 
     reg PLL_EN {
-      unused unused0[31:1] = 0;
+      unused unused0[15:5] = 0;
+
+      field {
+        encode = my_enum_t;
+      } E_NUFF[4:3] = my_enum_t::e_foo;
+
+      field {
+        encode = my_enum_t;
+        desc = "Demonstrates RDL enum";
+      } E_NUM[2:1] = my_enum_t::e_foo;
 
       field {
         desc = "PLL enable";
