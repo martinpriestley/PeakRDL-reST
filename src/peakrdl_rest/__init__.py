@@ -5,5 +5,6 @@ __authors__ = [
 ]
 
 from .exporter import RestExporter
+from .sphinxext import setup
 
-__all__ = ["RestExporter"]
+__all__ = ["RestExporter", "setup"]

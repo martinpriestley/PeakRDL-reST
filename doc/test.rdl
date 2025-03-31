@@ -35,14 +35,24 @@ addrmap FOOBAR {
   // Regfiles
   //---------------------------------------------------------------------------
 
-  regfile CLOCK {
-    name = "Clock and PLL configuration";
-    desc = "Registers to configure the PLL's multipliers / dividers, and any
-      other clock dividers / muxes / gates, to derive all internal clocks from the
-      REFCLK input.";
+  regfile R1 {
+    name = "First regmap";
+    desc = "Just a collection of registers";
 
     reg PLL_EN {
-      unused unused0[15:5] = 0;
+      unused unused0[15:8] = 0;
+
+      field {
+        desc = "This description uses some [b]SystemRDL[/b] [i]text
+          formatting[/i] to format the text, for things like:
+
+          [list]
+            [*] Bold
+            [*] Italic
+            [*] Lists
+          [/list]
+        ";
+      } F_RDL_DESC[7:5] = 0;
 
       field {
         encode = my_enum_t;
@@ -57,37 +67,22 @@ addrmap FOOBAR {
         desc = "PLL enable";
       } EN[0:0] = 0;
     } PLL_EN @0x00;
+
+    PLACEHOLDER PLACEHOLDER @0x02;
+    PLACEHOLDER PLACEHOLDERS[4] @0x04 += 2;
   };
 
-  regfile OPS {
-    name = "Operations";
-    desc = "Configure and control the vector/matrix operation. VMM/VMI, single
-      or batch. FSM timings. INT pin function. Input / output buffer access via JTAG.";
+  regfile R2 {
+    name = "Another register map";
+    desc = "Nothing to see here";
 
     PLACEHOLDER PLACEHOLDER @0x00;
   };
-
-  regfile CALIB {
-    name = "Calibration and overrides";
-    desc = "Calibration values and overrides for analogue components.";
-
-    PLACEHOLDER PLACEHOLDER @0x00;
-  };
-
-  regfile ATEST {
-    name = "Analogue test structure control";
-    desc = "Control of the analogue test array, and test bus muxes.";
-
-    PLACEHOLDER PLACEHOLDER[4] @0x00 += 2;
-  };
-
 
   //---------------------------------------------------------------------------
   // Regfile Instantiations
   //---------------------------------------------------------------------------
 
-  CLOCK         CLOCK   @0x000;
-  OPS           OPS     @0x100;
-  CALIB         CALIB   @0x200;
-  ATEST         ATEST   @0x300;
+  R1         R1   @0x000;
+  R2         R2   @0x100;
 };

@@ -2,9 +2,9 @@
 name = "PeakRDL-rest"
 requires-python = ">= 3.8"
 dependencies = [
-    "systemrdl-compiler",
-    "peakrdl",
-    "rstcloth",
+    "systemrdl-compiler >= 1.25.0",
+    "peakrdl >= 1.1.0",
+    "rstcloth ~= 0.6.0",
 ]
 dynamic = ["version"]
 
@@ -27,4 +27,8 @@ write_to = "src/peakrdl_rest/_version.py"
 
 [project.entry-points."peakrdl.exporters"]
 rest = "peakrdl_rest.__peakrdl__:Exporter"
+
+[project.entry-points."sphinx.extensions"]
+peakrdl_rest = "peakrdl_rest.sphinxext:setup"
+
 
