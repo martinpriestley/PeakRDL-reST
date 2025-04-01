@@ -1,2 +1,2 @@
-# PeakRDL-rest
-ReStructuredText exporter for the PeakRDL toolchain
+# PeakRDL-reST
+reStructuredText exporter for the PeakRDL toolchain

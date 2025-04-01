@@ -1,5 +1,12 @@
 
-.. |pkg| replace:: PeakRDL-reST
+.. |pkg| replace:: **PeakRDL-reST**
+
+.. toctree::
+   :hidden:
+   :maxdepth: 3
+
+   self
+   example
 
 ************
 PeakRDL-reST
@@ -31,7 +38,7 @@ It is possible to `PeakRDL-Markdown`_ with Sphinx to achieve consistent HTML and
 PDF views, but there's no support for cross-referencing. At time of writing it's
 also fairly feature-limited (e.g. no support for enums).
 
-PeakRDL is bundled with an excellent `PeakRDL-HTML` exporter, which uses
+PeakRDL is bundled with an excellent `PeakRDL-HTML`_ exporter, which uses
 sufficiently deterministic URLs that cross-referencing is possible\ [#fn-url]_.
 If you're only looking for HTML docs this is probably the better approach. But
 it's not practical for PDF output.
@@ -130,16 +137,11 @@ convert this to reST - the raw description is used.
 Credits
 =======
 
-Thanks to Alex Mykyta and the excellent PeakRDL / SystemRDL compiler projects.
+Thanks to Alex Mykyta for the excellent `PeakRDL`_ / SystemRDL compiler projects.
 
-Much inspiration was taken from Marek Pikuła's `PeakRDL-Markdown`.
+Much inspiration was taken from Marek Pikuła's `PeakRDL-Markdown`_.
 
 
-
-.. toctree::
-   :hidden:
-
-   example
 
 .. _SystemRDL specification: https://www.accellera.org/images/downloads/standards/systemrdl/SystemRDL_2.0_Jan2018.pdf
 .. _PeakRDL: https://github.com/SystemRDL/PeakRDL-html
