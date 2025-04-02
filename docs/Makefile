@@ -20,5 +20,5 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 rdl:
-	peakrdl rest test.rdl -o $(SOURCEDIR)/regmap.rst
+	peakrdl rest -d test.rdl -o $(SOURCEDIR)/regmap.rst
 

@@ -1,5 +1,4 @@
 sphinx
 sphinx-rtd-theme
-sphinxcontrib-bitfield
 
--e .
+-e .[sphinxcontrib-bitfield]

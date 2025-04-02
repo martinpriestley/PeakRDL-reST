@@ -8,6 +8,9 @@ dependencies = [
 ]
 dynamic = ["version"]
 
+[project.optional-dependencies]
+sphinxcontrib-bitfield = ["sphinxcontrib-bitfield >= 2.0"]
+
 [build-system]
 requires = [
     "setuptools",

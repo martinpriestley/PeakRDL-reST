@@ -55,6 +55,12 @@ For now, install directly from github:
 
   pip install git+ssh://git@github.com:RainUKLabs/PeakRDL-rest.git@main
 
+or to bring in dependencies for rendering the bitfield :ref:`diagrams` in Sphinx:
+
+.. code-block::
+
+  pip install git+ssh://git@github.com:RainUKLabs/PeakRDL-rest.git[sphinxcontrib-bitfield]@main
+
 .. todo::
   - Version tags
   - pypi releases
@@ -110,6 +116,8 @@ the page.
 
 Features
 ========
+
+.. _diagrams:
 
 Diagrams
 --------

@@ -48,6 +48,17 @@ PLL_EN
 :Base Offset: 0x000
 :Size: 0x002
 
+.. bitfield::
+   :bits: 16
+   :lanes: 1
+   :fontsize: 12
+   :caption: PLL_EN
+
+   [{"name": "EN", "bits": 1, "type": 4}, {"name": "E_NUM", "bits": 2,
+   "type": 4}, {"name": "E_NUFF", "bits": 2, "type": 4}, {"name":
+   "F_RDL_DESC", "bits": 3, "type": 4}, {"name": "unused0", "bits": 8,
+   "type": 1}]
+
 .. _regmap__FOOBAR__R1__PLL_EN__unused0:
 
 +--------+-----------------------------------------------------------+-------------+-------------+-------------+--------+
@@ -130,6 +141,14 @@ PLACEHOLDER
 :Size: 0x002
 :Description: Placeholder register
 
+.. bitfield::
+   :bits: 16
+   :lanes: 1
+   :fontsize: 12
+   :caption: PLACEHOLDER
+
+   [{"name": "unused0", "bits": 16, "type": 1}]
+
 .. _regmap__FOOBAR__R1__PLACEHOLDER__unused0:
 
 +--------+--------------+-------------+-------------+---------+--------+
@@ -150,6 +169,14 @@ PLACEHOLDERS
 :Array Stride: 0x002
 :Total Size: 0x008
 :Description: Placeholder register
+
+.. bitfield::
+   :bits: 16
+   :lanes: 1
+   :fontsize: 12
+   :caption: PLACEHOLDERS
+
+   [{"name": "unused0", "bits": 16, "type": 1}]
 
 .. _regmap__FOOBAR__R1__PLACEHOLDERS__unused0:
 
@@ -186,6 +213,14 @@ PLACEHOLDER
 :Base Offset: 0x000
 :Size: 0x002
 :Description: Placeholder register
+
+.. bitfield::
+   :bits: 16
+   :lanes: 1
+   :fontsize: 12
+   :caption: PLACEHOLDER
+
+   [{"name": "unused0", "bits": 16, "type": 1}]
 
 .. _regmap__FOOBAR__R2__PLACEHOLDER__unused0:
 
