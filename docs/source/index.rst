@@ -91,7 +91,7 @@ To use the Sphinx extension, in your ``conf.py``:
 .. code-block:: python
 
   extensions = [
-      'PeakRDL-reST',
+      'peakrdl_rest',
       ...
   ]
 
@@ -131,16 +131,18 @@ Unsupported Features
 There are likely many SystemRDL features that don't yet produce sensible output.
 Some things I've not put any thought to are:
 
-- Arrays
-- Memories
+- The finer points of arrays
 - Access modes beyond just read and write
 - Counter and interrupt properties
 - Signals
-
+- User-defined properties
 
 SystemRDL ``description`` and other text fields may contain text formatting
 markup (defined in the `SystemRDL specification`_ Annex F). |pkg| does not
 convert this to reST - the raw description is used.
+
+Larger designs would benefit from being split across multiple pages. Perhaps
+the pagination scheme of `PeakRDL-HTML`_ should be followed.
 
 Credits
 =======

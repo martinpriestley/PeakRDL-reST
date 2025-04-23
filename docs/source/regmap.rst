@@ -1,27 +1,31 @@
 .. _regmap__FOOBAR:
 
-######
-FOOBAR
-######
+#################
+AddressMap FOOBAR
+#################
 
 :Absolute Address: 0x000
 :Base Offset: 0x000
-:Size: 0x102
+:Size: 0x2C0
 
 
-+----------+-------------------------------+----------------------+
-| Offset   | Identifier                    | Name                 |
-+==========+===============================+======================+
-| 0x000    | :ref:`R1<regmap__FOOBAR__R1>` | First regmap         |
-+----------+-------------------------------+----------------------+
-| 0x100    | :ref:`R2<regmap__FOOBAR__R2>` | Another register map |
-+----------+-------------------------------+----------------------+
++----------+-----------------------------------+----------------------+
+| Offset   | Identifier                        | Name                 |
++==========+===================================+======================+
+| 0x000    | :ref:`R1<regmap__FOOBAR__R1>`     | First regmap         |
++----------+-----------------------------------+----------------------+
+| 0x100    | :ref:`R2<regmap__FOOBAR__R2>`     | Another register map |
++----------+-----------------------------------+----------------------+
+| 0x200    | :ref:`MEM<regmap__FOOBAR__MEM>`   | Memory               |
++----------+-----------------------------------+----------------------+
+| 0x280    | :ref:`MEM2<regmap__FOOBAR__MEM2>` | Memory with stuff    |
++----------+-----------------------------------+----------------------+
 
 .. _regmap__FOOBAR__R1:
 
-**
-R1
-**
+**********
+Regfile R1
+**********
 
 :Absolute Address: 0x000
 :Base Offset: 0x000
@@ -29,20 +33,20 @@ R1
 :Description: Just a collection of registers
 
 
-+----------+-------------------------------------------------------+-------------+
-| Offset   | Identifier                                            | Name        |
-+==========+=======================================================+=============+
-| 0x000    | :ref:`PLL_EN<regmap__FOOBAR__R1__PLL_EN>`             |             |
-+----------+-------------------------------------------------------+-------------+
-| 0x002    | :ref:`PLACEHOLDER<regmap__FOOBAR__R1__PLACEHOLDER>`   | Placeholder |
-+----------+-------------------------------------------------------+-------------+
-| 0x004    | :ref:`PLACEHOLDERS<regmap__FOOBAR__R1__PLACEHOLDERS>` | Placeholder |
-+----------+-------------------------------------------------------+-------------+
++----------+---------------------------------------------------------+-------------+
+| Offset   | Identifier                                              | Name        |
++==========+=========================================================+=============+
+| 0x000    | :ref:`PLL_EN<regmap__FOOBAR__R1__PLL_EN>`               |             |
++----------+---------------------------------------------------------+-------------+
+| 0x002    | :ref:`PLACEHOLDER<regmap__FOOBAR__R1__PLACEHOLDER>`     | Placeholder |
++----------+---------------------------------------------------------+-------------+
+| 0x004    | :ref:`PLACEHOLDERS[]<regmap__FOOBAR__R1__PLACEHOLDERS>` | Placeholder |
++----------+---------------------------------------------------------+-------------+
 
 .. _regmap__FOOBAR__R1__PLL_EN:
 
-PLL_EN
-======
+Register PLL_EN
+===============
 
 :Absolute Address: 0x000
 :Base Offset: 0x000
@@ -77,15 +81,15 @@ PLL_EN
 
 .. _regmap__FOOBAR__R1__PLL_EN__EN:
 
-EN
---
+Field EN
+--------
 
 PLL enable
 
 .. _regmap__FOOBAR__R1__PLL_EN__E_NUM:
 
-E_NUM
------
+Field E_NUM
+-----------
 
 Demonstrates RDL enum
 
@@ -105,8 +109,8 @@ my_enum_t:
 
 .. _regmap__FOOBAR__R1__PLL_EN__E_NUFF:
 
-E_NUFF
-------
+Field E_NUFF
+------------
 
 my_enum_t:
 
@@ -124,8 +128,8 @@ my_enum_t:
 
 .. _regmap__FOOBAR__R1__PLL_EN__F_RDL_DESC:
 
-F_RDL_DESC
-----------
+Field F_RDL_DESC
+----------------
 
 This description uses some [b]SystemRDL[/b] [i]text formatting[/i] to
 format the text, for things like:  [list]   [*] Bold   [*] Italic   [*]
@@ -133,8 +137,8 @@ Lists [/list]
 
 .. _regmap__FOOBAR__R1__PLACEHOLDER:
 
-PLACEHOLDER
-===========
+Register PLACEHOLDER
+====================
 
 :Absolute Address: 0x002
 :Base Offset: 0x002
@@ -159,8 +163,8 @@ PLACEHOLDER
 
 .. _regmap__FOOBAR__R1__PLACEHOLDERS:
 
-PLACEHOLDERS
-============
+Register PLACEHOLDERS[]
+=======================
 
 :Absolute Address: 0x004
 :Base Offset: 0x004
@@ -188,9 +192,9 @@ PLACEHOLDERS
 
 .. _regmap__FOOBAR__R2:
 
-**
-R2
-**
+**********
+Regfile R2
+**********
 
 :Absolute Address: 0x100
 :Base Offset: 0x100
@@ -206,8 +210,8 @@ R2
 
 .. _regmap__FOOBAR__R2__PLACEHOLDER:
 
-PLACEHOLDER
-===========
+Register PLACEHOLDER
+====================
 
 :Absolute Address: 0x100
 :Base Offset: 0x000
@@ -223,6 +227,64 @@ PLACEHOLDER
    [{"name": "unused0", "bits": 16, "type": 1}]
 
 .. _regmap__FOOBAR__R2__PLACEHOLDER__unused0:
+
++--------+--------------+-------------+-------------+---------+--------+
+| Bits   | Identifier   | SW Access   | HW Access   | Reset   | Name   |
++========+==============+=============+=============+=========+========+
+| 15:0   | unused0      | r           | r           | 0x0     |        |
++--------+--------------+-------------+-------------+---------+--------+
+
+.. _regmap__FOOBAR__MEM:
+
+**********
+Memory MEM
+**********
+
+:Absolute Address: 0x200
+:Base Offset: 0x200
+:Size: 0x040
+:Description: An example memory
+
+.. _regmap__FOOBAR__MEM2:
+
+***********
+Memory MEM2
+***********
+
+:Absolute Address: 0x280
+:Base Offset: 0x280
+:Size: 0x040
+:Description: An example memory containing registers
+
+
++----------+-----------------------------------------------------------------+-------------+
+| Offset   | Identifier                                                      | Name        |
++==========+=================================================================+=============+
+| 0x000    | :ref:`PLACEHOLDER_REG[]<regmap__FOOBAR__MEM2__PLACEHOLDER_REG>` | Placeholder |
++----------+-----------------------------------------------------------------+-------------+
+
+.. _regmap__FOOBAR__MEM2__PLACEHOLDER_REG:
+
+Register PLACEHOLDER_REG[]
+==========================
+
+:Absolute Address: 0x280
+:Base Offset: 0x000
+:Size: 0x008
+:Array Dimensions: [4]
+:Array Stride: 0x002
+:Total Size: 0x008
+:Description: Placeholder register
+
+.. bitfield::
+   :bits: 16
+   :lanes: 1
+   :fontsize: 12
+   :caption: PLACEHOLDER_REG
+
+   [{"name": "unused0", "bits": 16, "type": 1}]
+
+.. _regmap__FOOBAR__MEM2__PLACEHOLDER_REG__unused0:
 
 +--------+--------------+-------------+-------------+---------+--------+
 | Bits   | Identifier   | SW Access   | HW Access   | Reset   | Name   |

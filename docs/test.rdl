@@ -85,4 +85,19 @@ addrmap FOOBAR {
 
   R1         R1   @0x000;
   R2         R2   @0x100;
+
+  external mem {
+    name = "Memory";
+    desc = "An example memory";
+    mementries = 32;
+    memwidth = 16;
+  } MEM @0x200;
+
+  external mem {
+    name = "Memory with stuff";
+    desc = "An example memory containing registers";
+    mementries = 32;
+    memwidth = 16;
+    PLACEHOLDER PLACEHOLDER_REG [4];
+  } MEM2 @0x280;
 };

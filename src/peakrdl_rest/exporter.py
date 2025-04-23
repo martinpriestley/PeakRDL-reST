@@ -66,6 +66,19 @@ class RestExporter:
         path = node.get_path(hier_separator='__', empty_array_suffix='')
         return "regmap__" + path
 
+    def _node_name(self, node):
+        suffix = ""
+        if hasattr(node, "is_array"):
+            if node.is_array:
+                suffix = "[]"
+        return node.inst_name + suffix
+
+    def _node_heading(self, level: int, node: Node):
+        node_type = self._get_node_type(node)
+        node_name = self._node_name(node)
+        title = f"{node_type} {node_name}"
+        self._heading(level, title, label=self._node_label(node))
+
     def _addressable_info(self, node: AddressableNode, level: int):
         # If we're describing an array of registers, point at the [0] instance.
         # TODO - presumably this breaks with multidimensional arrays
@@ -96,9 +109,23 @@ class RestExporter:
         if set_index:
             node.current_idx = None
 
+    def _get_node_type(self, node):
+        if isinstance(node, AddrmapNode):
+            return "AddressMap"
+        elif isinstance(node, RegfileNode):
+            return "Regfile"
+        elif isinstance(node, MemNode):
+            return "Memory"
+        elif isinstance(node, RegNode):
+            return "Register"
+        elif isinstance(node, FieldNode):
+            return "Field"
+
+        logger.warning(f"Unknown node type {type(node)}")
+        return "Node"
 
     def _convert_addrmap(self, node: AddressableNode, level: int):
-        self._heading(level, node.inst_name, label=self._node_label(node))
+        self._node_heading(level, node)
         self._addressable_info(node, level)
 
         # Table of direct children
@@ -109,23 +136,22 @@ class RestExporter:
             ref = self._node_label(child)
             table.append([
                 self.hex(child.raw_address_offset),
-                f":ref:`{child.inst_name}<{ref}>`",
+                f":ref:`{self._node_name(child)}<{ref}>`",
                 name,
             ])
 
-        self.doc.table(headers, table)
+        if table:
+            self.doc.table(headers, table)
 
         # Descend through child nodes
         for child in node.children(unroll=False):
-            if isinstance(child, (AddrmapNode, RegfileNode)):
+            if isinstance(child, (AddrmapNode, RegfileNode, MemNode)):
                 self._convert_addrmap(child, level+1)
-            elif isinstance(child, MemNode):
-                self._convert_mem(child, level+1)
             elif isinstance(child, RegNode):
                 self._convert_reg(child, level+1)
 
     def _convert_reg(self, node: AddressableNode, level: int):
-        self._heading(level, node.inst_name, label=self._node_label(node))
+        self._node_heading(level, node)
         self._addressable_info(node, level)
 
         if self.do_bitfield_diagrams:
@@ -161,10 +187,10 @@ class RestExporter:
             # Fields only get a section to link to if they have a description or
             # enum. Otherwise, put a link to (but not from) the table for that
             # field, so external references have something to point to
-            field_entry = field.inst_name
+            field_entry = self._node_name(field)
             label = self._node_label(field)
             if field.get_property("desc") or field.get_property("encode"):
-                field_entry = f":ref:`{field.inst_name}<{label}>`"
+                field_entry = f":ref:`{self._node_name(field)}<{label}>`"
             else:
                 self.doc.ref_target(label)
 
@@ -184,7 +210,7 @@ class RestExporter:
             desc = field.get_property("desc")
             enum = field.get_property("encode")
             if desc or enum:
-                self._heading(level+1, field.inst_name, self._node_label(field))
+                self._node_heading(level+1, field)
             if desc:
                 self.doc.content(desc)
                 self.doc.newline()
